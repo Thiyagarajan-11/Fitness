@@ -5,7 +5,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { AuthProvider } from "../src/context/AuthContext";
 import { auth } from "../src/firebaseConfig";
 import Toast from "react-native-toast-message";
-
 export default function Layout() {
   const router = useRouter();
   
@@ -28,6 +27,8 @@ export default function Layout() {
         <Stack.Screen name="RegisterScreen" options={{ headerShown: false }} />
         <Stack.Screen name="index" options={{ headerShown: false }} />
         <Stack.Screen name="profile" options={{ title: "Profile" }} />
+        <Stack.Screen name="progressChart" options={{ title: "Progress Chart" }} />
+        <Stack.Screen name="workoutHistory" options={{ title: "Workout History" }} />
       </Stack>
       <Toast />
     </AuthProvider>

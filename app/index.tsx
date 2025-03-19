@@ -22,6 +22,13 @@ export default function Index() {
                 <ButtonComponent title="View Workouts" onPress={() => router.push('/workout')} icon="barbell-outline" />
                 <ButtonComponent title="Track Calories" onPress={() => router.push('/calorie')} icon="flame-outline" />
                 <ButtonComponent title="Profile" onPress={() => router.push('/profile')} icon="person-outline" />
+                    
+<ButtonComponent
+    title="View Progress Chart"
+    onPress={() => router.push("/progressChart")}
+    icon="stats-chart-outline"
+/>
+            
             </View>
         </LinearGradient>
     );

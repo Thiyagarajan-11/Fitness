@@ -99,6 +99,7 @@ const CalorieScreen: React.FC = () => {
 
             {errorMessage && <Text style={styles.errorText}>{errorMessage}</Text>}
 
+            {/* Display Food Items */}
             <FlatList
                 data={foodItems}
                 keyExtractor={(item) => item.id}
@@ -111,12 +112,31 @@ const CalorieScreen: React.FC = () => {
                             <Text style={styles.nutritionText}>Fat: {item.fat} g</Text>
                         </View>
                         <TouchableOpacity style={styles.addButton} onPress={() => addToCart(item)}>
-                            <Text style={styles.addButtonText}>Add to Cart</Text>
+                            <Text style={styles.addButtonText}>Add to Basket</Text>
                         </TouchableOpacity>
                     </View>
                 )}
             />
 
+            {/* Display Cart Items */}
+            <Text style={styles.cartTitle}>Your Basket</Text>
+            <FlatList
+                data={cart}
+                keyExtractor={(item) => item.id}
+                renderItem={({ item }) => (
+                    <View style={styles.cartItem}>
+                        <Text style={styles.cartItemName}>{item.name} (x{item.count})</Text>
+                        <Text style={styles.cartItemDetails}>Calories: {item.calories * item.count} kcal</Text>
+                        <Text style={styles.cartItemDetails}>Protein: {item.protein * item.count} g</Text>
+                        <Text style={styles.cartItemDetails}>Fat: {item.fat * item.count} g</Text>
+                        <TouchableOpacity style={styles.removeButton} onPress={() => removeFromCart(item.id)}>
+                            <Text style={styles.removeButtonText}>Remove</Text>
+                        </TouchableOpacity>
+                    </View>
+                )}
+            />
+
+            {/* View Cart Button */}
             <TouchableOpacity style={styles.viewCartButton} onPress={() => router.push(`/calorieCart?cart=${encodeURIComponent(JSON.stringify(cart))}`)}>
                 <Text style={styles.viewCartText}>Add To Plate</Text>
             </TouchableOpacity>
@@ -210,6 +230,46 @@ const styles = StyleSheet.create({
         elevation: 2,
     },
     addButtonText: {
+        color: '#ffffff',
+        fontSize: 14,
+        fontWeight: 'bold',
+    },
+    cartTitle: {
+        fontSize: 22,
+        fontWeight: 'bold',
+        color: '#008080',
+        marginTop: 16,
+        marginBottom: 8,
+    },
+    cartItem: {
+        backgroundColor: '#ffffff',
+        borderRadius: 12,
+        marginVertical: 6,
+        padding: 12,
+        shadowColor: '#000',
+        shadowOpacity: 0.1,
+        shadowRadius: 4,
+        elevation: 2,
+    },
+    cartItemName: {
+        fontSize: 16,
+        fontWeight: 'bold',
+        color: '#2d3436',
+        marginBottom: 4,
+    },
+    cartItemDetails: {
+        fontSize: 12,
+        color: '#636e72',
+        marginBottom: 2,
+    },
+    removeButton: {
+        backgroundColor: '#ff6347',
+        padding: 8,
+        borderRadius: 20,
+        alignItems: 'center',
+        marginTop: 8,
+    },
+    removeButtonText: {
         color: '#ffffff',
         fontSize: 14,
         fontWeight: 'bold',

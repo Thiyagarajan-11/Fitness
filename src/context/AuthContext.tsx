@@ -86,9 +86,16 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchUserData = async () => {
     if (user) {
-      const userDoc = await getDoc(doc(db, "users", user.uid));
-      if (userDoc.exists()) {
-        setUserData(userDoc.data());
+      try {
+        const userDoc = await getDoc(doc(db, "users", user.uid));
+        if (userDoc.exists()) {
+          console.log("Fetched user data:", userDoc.data()); // Debugging
+          setUserData(userDoc.data());
+        } else {
+          console.log("User document does not exist."); // Debugging
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error); // Debugging
       }
     }
   };
